@@ -1,5 +1,5 @@
-kaynak:https://stackoverflow.com/questions/50288144/how-to-create-build-definitions-through-vsts-rest-api
-
+// kaynak:https://stackoverflow.com/questions/50288144/how-to-create-build-definitions-through-vsts-rest-api
+// rest url for azuredevops 2019 https://p50/DefaultCollection/ilk%20proje/_apis/build/definitions?api-version=5.0-preview.6
 
 {
   "process": {
