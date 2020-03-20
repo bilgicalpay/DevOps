@@ -1,0 +1,60 @@
+kaynak:https://stackoverflow.com/questions/50288144/how-to-create-build-definitions-through-vsts-rest-api
+
+
+{
+  "process": {
+    "phases": [
+      {
+        "steps": [],
+        "name": "Phase 1",
+        "refName": "Phase_1",
+        "condition": "succeeded()",
+        "target": {
+          "executionOptions": {
+            "type": 0
+          },
+          "allowScriptsAuthAccessOption": false,
+          "type": 1
+        },
+        "jobAuthorizationScope": "DefaultCollection",
+        "jobCancelTimeoutInMinutes": 1
+      }
+    ],
+    "type": 1
+  },
+  "repository": {
+    "properties": {
+      "cleanOptions": "0",
+      "labelSources": "0",
+      "labelSourcesFormat": "$(build.buildNumber)",
+      "reportBuildStatus": "true",
+      "gitLfsSupport": "false",
+      "skipSyncSource": "false",
+      "checkoutNestedSubmodules": "false",
+      "fetchDepth": "0"
+    },
+    
+    // id, url,name vedevault branch ve pool name   her projenin kendi repo ismini şu api ile çekip "https://p50/DefaultCollection/ilk%20proje/_apis/git/repositories?api-version=5.0" değişken olarak koymak gerek. 
+    "id": "6f337fda-7d6a-4a50-8636-ab016df0d025",
+    
+    "type": "TfsGit",
+    "name": "ilk proje",
+    "url": "https://p50/DefaultCollection/ilk%20proje/_git/ilk%20proje",
+    "defaultBranch": "refs/heads/master",
+    "clean": "false",
+    "checkoutSubmodules": false
+  },
+  "processParameters": {},
+  "drafts": [],
+  "queue": {
+    "id": 1,
+    "name": "Default",
+    "pool": {
+      "id": 1,
+      "name": "Default"
+    }
+  },
+  "name": "definitionCreatedByRESTAPI11",
+  "type": "build",
+  "queueStatus": "enabled"
+}
