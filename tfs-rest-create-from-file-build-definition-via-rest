@@ -1,4 +1,5 @@
-//{tfs-azuredevop-server-url}/{collection-name}/{projec-url}/_apis/build/definitions?api-version=4.1
+//REST POST : {tfs-azuredevop-server-url}/{collection-name}/{projec-url}/_apis/build/definitions?api-version=4.1
+// api version 5 de de çalışıyor.
 ///örnek maven-sonar-tgs-git taskları olan bir job definition. 
 
 {
