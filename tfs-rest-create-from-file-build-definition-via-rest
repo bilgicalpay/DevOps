@@ -1,0 +1,230 @@
+//{tfs-azuredevop-server-url}/{collection-name}/{projec-url}/_apis/build/definitions?api-version=4.1
+///örnek maven-sonar-tgs-git taskları olan bir job definition. 
+
+{
+    "properties":{
+ 
+    },
+    "tags":[
+ 
+    ],
+    "_links":{
+       "self":{
+          "href":"https://p50/DefaultCollection/f1eed20a-c756-4774-8ef7-2c19f3a7f7fa/_apis/build/Definitions/4?revision=1"
+       },
+       "web":{
+          "href":"https://p50/DefaultCollection/f1eed20a-c756-4774-8ef7-2c19f3a7f7fa/_build/definition?definitionId=4"
+       },
+       "editor":{
+          "href":"https://p50/DefaultCollection/f1eed20a-c756-4774-8ef7-2c19f3a7f7fa/_build/designer?id=4&_a=edit-build-definition"
+       },
+       "badge":{
+          "href":"https://p50/DefaultCollection/f1eed20a-c756-4774-8ef7-2c19f3a7f7fa/_apis/build/status/4"
+       }
+    },
+    "jobAuthorizationScope":"projectCollection",
+
+    "process":{
+        "phases":[
+           {
+              "steps":[
+                 {
+                    "environment":{
+  
+                    },
+                    "enabled":true,
+                    "continueOnError":false,
+                    "alwaysRun":false,
+                    "displayName":"Prepare analysis on SonarQube",
+                    "timeoutInMinutes":0,
+                    "condition":"succeeded()",
+                    "task":{
+                       "id":"15b84ca1-b62f-4a2a-a403-89b77a063157",
+                       "versionSpec":"4.*",
+                       "definitionType":"task"
+                    },
+                    "inputs":{
+                       "SonarQube":"0b5ea5b5-9cc8-46c2-978c-8bcbd331e531",
+                       "scannerMode":"MSBuild",
+                       "configMode":"file",
+                       "configFile":"sonar-project.properties",
+                       "cliProjectKey":"",
+                       "projectKey":"1",
+                       "cliProjectName":"",
+                       "projectName":"1",
+                       "cliProjectVersion":"1.0",
+                       "projectVersion":"1.0",
+                       "cliSources":".",
+                       "extraProperties":"# Additional properties that will be passed to the scanner, \n# Put one key=value per line, example:\n# sonar.exclusions=**/*.bin"
+                    }
+                 },
+                 {
+                    "environment":{
+  
+                    },
+                    "enabled":true,
+                    "continueOnError":false,
+                    "alwaysRun":false,
+                    "displayName":"Maven pom.xml",
+                    "timeoutInMinutes":0,
+                    "condition":"succeeded()",
+                    "task":{
+                       "id":"ac4ee482-65da-4485-a532-7b085873e532",
+                       "versionSpec":"3.*",
+                       "definitionType":"task"
+                    },
+                    "inputs":{
+                       "mavenPOMFile":"pom.xml",
+                       "goals":"package",
+                       "options":"",
+                       "publishJUnitResults":"true",
+                       "testResultsFiles":"**/surefire-reports/TEST-*.xml",
+                       "testRunTitle":"",
+                       "codeCoverageTool":"None",
+                       "classFilter":"",
+                       "classFilesDirectories":"",
+                       "srcDirectories":"",
+                       "failIfCoverageEmpty":"false",
+                       "javaHomeSelection":"JDKVersion",
+                       "jdkVersion":"default",
+                       "jdkUserInputPath":"",
+                       "jdkArchitecture":"x64",
+                       "mavenVersionSelection":"Default",
+                       "mavenPath":"",
+                       "mavenSetM2Home":"false",
+                       "mavenOpts":"-Xmx1024m",
+                       "mavenFeedAuthenticate":"false",
+                       "sqAnalysisEnabled":"false",
+                       "sqMavenPluginVersionChoice":"latest",
+                       "checkstyleAnalysisEnabled":"false",
+                       "pmdAnalysisEnabled":"false",
+                       "findbugsAnalysisEnabled":"false"
+                    }
+                 },
+                 {
+                    "environment":{
+  
+                    },
+                    "enabled":true,
+                    "continueOnError":false,
+                    "alwaysRun":false,
+                    "displayName":"Run Code Analysis",
+                    "timeoutInMinutes":0,
+                    "condition":"succeeded()",
+                    "task":{
+                       "id":"6d01813a-9589-4b15-8491-8164aeb38055",
+                       "versionSpec":"4.*",
+                       "definitionType":"task"
+                    },
+                    "inputs":{
+  
+                    }
+                 },
+                 {
+                    "environment":{
+  
+                    },
+                    "enabled":true,
+                    "continueOnError":false,
+                    "alwaysRun":false,
+                    "displayName":"Publish Quality Gate Result",
+                    "timeoutInMinutes":0,
+                    "condition":"succeeded()",
+                    "task":{
+                       "id":"291ed61f-1ee4-45d3-b1b0-bf822d9095ef",
+                       "versionSpec":"4.*",
+                       "definitionType":"task"
+                    },
+                    "inputs":{
+                       "pollingTimeoutSec":"300"
+                    }
+                 }
+              ],
+              "name":"Phase 1",
+              "refName":"Phase_1",
+              "condition":"succeeded()",
+              "target":{
+                 "executionOptions":{
+                    "type":0
+                 },
+                 "allowScriptsAuthAccessOption":false,
+                 "type":1
+              },
+              "jobAuthorizationScope":1,
+              "jobCancelTimeoutInMinutes":1
+           }
+        ],
+        "type":1
+     },
+    
+     "repository":{
+        "properties":{
+           "cleanOptions":"0",
+           "labelSources":"0",
+           "labelSourcesFormat":"$(build.buildNumber)",
+           "reportBuildStatus":"true",
+           "gitLfsSupport":"false",
+           "skipSyncSource":"false",
+           "checkoutNestedSubmodules":"false",
+           "fetchDepth":"0"
+        },
+        "id":"6f337fda-7d6a-4a50-8636-ab016df0d025",
+        "type":"TfsGit",
+        "name":"ilk proje",
+        "url":"https://p50/DefaultCollection/ilk%20proje/_git/ilk%20proje",
+        "defaultBranch":"refs/heads/master",
+        "clean":"false",
+        "checkoutSubmodules":false
+     },
+     "processParameters":{
+  
+     },
+     "quality":1,
+     "authoredBy":{
+        "displayName":"ALPAY BİLGİÇ",
+        "url":"https://p50/DefaultCollection/_apis/Identities/34c91ab5-88f1-46e5-a21c-6e071859f926",
+        "_links":{
+           "avatar":{
+              "href":"https://p50/DefaultCollection/_apis/GraphProfile/MemberAvatars/win.Uy0xLTUtMjEtMTk4ODg4MTM2MS0yMDIwMzYwMDU1LTI4NTA3MTcxMTgtMTAwMQ"
+           }
+        },
+        "id":"34c91ab5-88f1-46e5-a21c-6e071859f926",
+        "uniqueName":"P50\\bilgi",
+        "imageUrl":"https://p50/DefaultCollection/_api/_common/identityImage?id=34c91ab5-88f1-46e5-a21c-6e071859f926",
+        "descriptor":"win.Uy0xLTUtMjEtMTk4ODg4MTM2MS0yMDIwMzYwMDU1LTI4NTA3MTcxMTgtMTAwMQ"
+     },
+     "drafts":[
+  
+     ],
+     "queue":{
+        "_links":{
+           "self":{
+              "href":"https://p50/DefaultCollection/_apis/build/Queues/1"
+           }
+        },
+        "id":1,
+        "name":"Default",
+        "url":"https://p50/DefaultCollection/_apis/build/Queues/1",
+        "pool":{
+           "id":1,
+           "name":"Default"
+        }
+     },
+     "id":4,
+     "name":"rest-ile-yaratildi-elle-degistirildi-via-api-4.1",
+     "url":"https://p50/DefaultCollection/f1eed20a-c756-4774-8ef7-2c19f3a7f7fa/_apis/build/Definitions/4?revision=3",
+     "uri":"vstfs:///Build/Definition/4",
+     "path":"\\",
+     "type":2,
+     "queueStatus":0,
+     "revision":3,
+     "createdDate":"2020-03-24T09:39:02.740Z",
+     "project":{
+        "id":"f1eed20a-c756-4774-8ef7-2c19f3a7f7fa",
+        "name":"ilk proje",
+        "url":"https://p50/DefaultCollection/_apis/projects/f1eed20a-c756-4774-8ef7-2c19f3a7f7fa",
+        "state":1,
+        "revision":8,
+        "visibility":0
+     }
+  }
